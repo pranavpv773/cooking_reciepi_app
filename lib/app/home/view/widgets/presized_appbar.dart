@@ -15,12 +15,9 @@ class PresizedAppBarWidget extends StatelessWidget {
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: CircleAvatar(
-          radius: 20,
+          radius: 50,
           backgroundColor: Colors.orange,
-          child: Icon(
-            Icons.person_outlined,
-            color: kWhite,
-          ),
+          child: Image.asset('assets/men_avathar.png'),
         ),
       ),
       title: const Padding(
