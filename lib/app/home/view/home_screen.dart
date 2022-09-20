@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/home/view/widgets/bottom_nav.dart';
+import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/home_card.dart';
 import 'widgets/presized_appbar.dart';
@@ -18,25 +21,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: PresizedAppBarWidget(),
-        ),
-        body: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: images.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: HomeCardsWidgets(
-                index: index,
-              ),
-            );
-          },
-        ),
+        child: Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: PresizedAppBarWidget(),
       ),
-    );
+      body: Consumer<HomeProvider>(builder: (context, value, _) {
+        return value.pages[value.pageIndex];
+      }),
+      bottomNavigationBar: BottomNavyWidget(),
+    ));
   }
 }
