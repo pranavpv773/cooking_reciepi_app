@@ -12,11 +12,15 @@ class PresizedAppBarWidget extends StatelessWidget {
       elevation: 15,
       shadowColor: kPrimary,
       backgroundColor: kWhite,
-      leading: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
-        child: Icon(
-          Icons.menu,
-          color: Colors.orange,
+      leading: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.orange,
+          child: Icon(
+            Icons.person_outlined,
+            color: kWhite,
+          ),
         ),
       ),
       title: const Padding(
