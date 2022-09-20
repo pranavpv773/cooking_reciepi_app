@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/constants/colors.dart';
-
 import 'widgets/login_button.dart';
 import 'widgets/login_textform.dart';
 
@@ -45,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                LoginTextButton(
+                const LoginTextButton(
                   text: "Register",
                 ),
               ],
