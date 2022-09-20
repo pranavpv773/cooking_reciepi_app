@@ -30,7 +30,7 @@ class BottomNavyWidget extends StatelessWidget {
         ),
         SalomonBottomBarItem(
           icon: const Icon(Icons.settings_applications_sharp),
-          title: const Text('Settins'),
+          title: const Text('Settings'),
           selectedColor: Colors.pink,
           unselectedColor: kPrimary,
         ),
