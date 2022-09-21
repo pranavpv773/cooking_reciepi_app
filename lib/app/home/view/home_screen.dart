@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
       body: Consumer<HomeProvider>(builder: (context, value, _) {
         return value.pages[value.pageIndex];
       }),
-      bottomNavigationBar: BottomNavyWidget(),
+      bottomNavigationBar: const BottomNavyWidget(),
     ));
   }
 }
