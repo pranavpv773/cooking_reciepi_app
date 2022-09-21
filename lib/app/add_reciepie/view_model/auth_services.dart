@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_reciepi/app/add_reciepie/model/recipe_model.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
+import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/model/user_model.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
@@ -50,10 +51,13 @@ class AddRecipiAuth with ChangeNotifier {
             .collection('receipi')
             .add(
               receipiModel.toMap(),
-            );
+            )
+            .then((value) {
+          context.read<HomeProvider>().onTabIndexChange(1);
+          RoutesProvider.removeScreenUntil(screen: const HomeScreen());
+        });
 
         context.read<SnackTProvider>().successSnack(context);
-        RoutesProvider.removeScreenUntil(screen: const HomeScreen());
       } on FirebaseException catch (e) {
         context.read<SnackTProvider>().errorBox(context, e.message.toString());
       }
