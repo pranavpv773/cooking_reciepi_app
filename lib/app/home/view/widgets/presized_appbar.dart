@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_reciepi/app/login/view_model/login_provider.dart';
-import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +25,7 @@ class PresizedAppBarWidget extends StatelessWidget {
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
-          'Hi ${context.read<SignUpProvider>().loggedUserModel.username}',
+          'Hi ${context.read<AddRecipiAuth>().userLogged.username}',
           style: const TextStyle(
             color: Colors.black,
             fontSize: 16,

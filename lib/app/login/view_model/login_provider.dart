@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
+import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/view/login_screen.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
@@ -13,8 +15,8 @@ class LoginProvider with ChangeNotifier {
   final password = TextEditingController();
   bool isLoading = false;
   onTabLoginFunction(BuildContext context) async {
+    isLoading = true;
     if (formKey.currentState!.validate()) {
-      isLoading = true;
       try {
         await context
             .read<SignUpProvider>()
@@ -23,7 +25,8 @@ class LoginProvider with ChangeNotifier {
                 email: email.text, password: password.text)
             .then(
               (value) => {
-                RoutesProvider.removeScreenUntil(screen: const HomeScreen()),
+                isLoading = false,
+                context.read<AddRecipiAuth>().getDataFromCloud(context),
               },
             );
         notifyListeners();
@@ -40,8 +43,13 @@ class LoginProvider with ChangeNotifier {
   }
 
   Future<void> logOut(BuildContext context) async {
-    await context.read<SignUpProvider>().auth.signOut().then((value) =>
-        RoutesProvider.removeScreenUntil(screen: const LoginScreen()));
+    await context.read<SignUpProvider>().auth.signOut().then((value) {
+      return RoutesProvider.removeScreenUntil(
+        screen: const LoginScreen(),
+      );
+    });
+    // ignore: use_build_context_synchronously
+    context.read<HomeProvider>().pageIndex = 1;
   }
 
   bool isValidEmail(String input) {

@@ -59,4 +59,19 @@ class AddRecipiAuth with ChangeNotifier {
       }
     }
   }
+
+  getDataFromCloud(BuildContext context) async {
+    User? user = context.read<SignUpProvider>().auth.currentUser;
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.email)
+        .get()
+        .then((value) {
+      UserModel.fromMap(value.data()!);
+      userLogged = UserModel.fromMap(value.data()!);
+
+      RoutesProvider.removeScreenUntil(screen: const HomeScreen());
+    });
+  }
 }
