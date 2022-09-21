@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
+import 'package:food_reciepi/app/login/view/login_screen.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
 import 'package:food_reciepi/routes/routes.dart';
@@ -39,7 +40,8 @@ class LoginProvider with ChangeNotifier {
   }
 
   Future<void> logOut(BuildContext context) async {
-    await context.read<SignUpProvider>().auth.signOut();
+    await context.read<SignUpProvider>().auth.signOut().then((value) =>
+        RoutesProvider.removeScreenUntil(screen: const LoginScreen()));
   }
 
   bool isValidEmail(String input) {

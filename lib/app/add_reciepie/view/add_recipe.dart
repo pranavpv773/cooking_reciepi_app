@@ -16,12 +16,12 @@ class AddReceipeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Form(
-        key: context.read<AddRecipiAuth>().registerFormKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            physics: const ScrollPhysics(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          physics: const ScrollPhysics(),
+          child: Form(
+            key: context.read<AddRecipiAuth>().registerFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
