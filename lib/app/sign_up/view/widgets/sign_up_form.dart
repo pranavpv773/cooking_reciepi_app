@@ -16,7 +16,7 @@ class SignupForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(25.0),
       child: Form(
-        key: context.read<SignUpProvider>().signUpKey,
+        key: context.read<SignUpProvider>().signUpFormKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
