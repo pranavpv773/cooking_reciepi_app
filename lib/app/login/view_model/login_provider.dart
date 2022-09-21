@@ -1,15 +1,45 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/home/view/home_screen.dart';
+import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
+import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
+import 'package:food_reciepi/routes/routes.dart';
+import 'package:provider/provider.dart';
 
 class LoginProvider with ChangeNotifier {
-  final userName = TextEditingController();
-  final confirmPassword = TextEditingController();
   final email = TextEditingController();
-  final phoneNumber = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final password = TextEditingController();
-  onTabLoginFunction(
-      BuildContext context, String emailFn, String passwordFn) async {
-    if (formKey.currentState!.validate()) {}
+  bool isLoading = false;
+  onTabLoginFunction(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      isLoading = true;
+      try {
+        await context
+            .read<SignUpProvider>()
+            .auth
+            .signInWithEmailAndPassword(
+                email: email.text, password: password.text)
+            .then(
+              (value) => {
+                RoutesProvider.removeScreenUntil(screen: const HomeScreen()),
+              },
+            );
+        notifyListeners();
+        email.clear();
+        password.clear();
+      } on FirebaseAuthException catch (e) {
+        isLoading = false;
+        context.read<SnackTProvider>().errorBox(
+              context,
+              e.message.toString(),
+            );
+      }
+    }
+  }
+
+  Future<void> logOut(BuildContext context) async {
+    await context.read<SignUpProvider>().auth.signOut();
   }
 
   bool isValidEmail(String input) {

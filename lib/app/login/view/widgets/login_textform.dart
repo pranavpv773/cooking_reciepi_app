@@ -1,12 +1,10 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
 import 'package:flutter/material.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/login/view_model/login_provider.dart';
 import 'package:food_reciepi/app/utility/view/email_form.dart';
 import 'package:food_reciepi/app/utility/view/password_form.dart';
 import 'package:food_reciepi/constants/colors.dart';
-import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class LoginTextforms extends StatelessWidget {
@@ -42,16 +40,15 @@ class LoginTextforms extends StatelessWidget {
                     ),
                   ),
                   onPressed: (() async {
-                    // context.read<LoginProvider>().onTabLoginFunction(
-                    //     context,
-                    //     context.read<LoginProvider>().email.text,
-                    //     context.read<LoginProvider>().password.text);
-                    RoutesProvider.removeScreenUntil(
-                        screen: const HomeScreen());
+                    context.read<LoginProvider>().onTabLoginFunction(
+                          context,
+                        );
                   }),
-                  child: const Text(
-                    "LOGIN",
-                  ),
+                  child: context.watch<LoginProvider>().isLoading == false
+                      ? const Text(
+                          "LOGIN",
+                        )
+                      : CircularProgressIndicator(),
                 ),
               ),
             ],

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/add_reciepie/view/widgets/description_form_widget.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/add_recipi_provider.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/sign_up/view/widgets/sign_textform.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
+
+import 'widgets/recipi_image.dart';
 
 class AddReceipeScreen extends StatelessWidget {
   const AddReceipeScreen({Key? key}) : super(key: key);
@@ -14,24 +17,20 @@ class AddReceipeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Form(
+        key: context.read<AddRecipiAuth>().signUpKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const ImageProfileAdd(),
                 SignUpTextforms(
                   icon: Icons.person_outline_outlined,
                   text: "Food Name",
                   vertical: 20,
-                  controller: context.read<SignUpProvider>().userName,
-                ),
-                DescriptionTextforms(
-                  icon: Icons.mail_outline_sharp,
-                  text: "Email",
-                  vertical: 15,
-                  controller: context.read<SignUpProvider>().email,
+                  controller: context.read<AddRecipiAuth>().foodname,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +44,7 @@ class AddReceipeScreen extends StatelessWidget {
                               icon: Icons.send_to_mobile_rounded,
                               text: "Time",
                               vertical: 15,
-                              controller:
-                                  context.read<SignUpProvider>().phoneNumber,
+                              controller: context.read<AddRecipiAuth>().time,
                             ),
                           ),
                         ],
@@ -83,7 +81,7 @@ class AddReceipeScreen extends StatelessWidget {
                                   onChanged: (value) {
                                     context
                                         .read<AddRecipiProvider>()
-                                        .radioButtonChanges(value!.toString());
+                                        .radioButtonChanges(value.toString());
                                   },
                                 ),
                                 const Text(
@@ -97,17 +95,10 @@ class AddReceipeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SignUpTextforms(
-                  icon: Icons.lock_outline,
-                  text: "Password",
+                DescriptionTextforms(
+                  icon: Icons.mail_outline_sharp,
                   vertical: 15,
-                  controller: context.read<SignUpProvider>().password,
-                ),
-                SignUpTextforms(
-                  icon: Icons.lock_reset_outlined,
-                  text: "Confirm Password",
-                  vertical: 15,
-                  controller: context.read<SignUpProvider>().confirmPassword,
+                  controller: context.read<AddRecipiAuth>().description,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -125,11 +116,6 @@ class AddReceipeScreen extends StatelessWidget {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: kTeal,
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }
@@ -157,13 +143,8 @@ class ButtonWidget extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          context.read<SignUpProvider>().signUp(
+          context.read<AddRecipiAuth>().addRecipieToFirebase(
                 context,
-                context.read<SignUpProvider>().email.text,
-                context.read<SignUpProvider>().password.text,
-                context.read<SignUpProvider>().userName.text,
-                context.read<SignUpProvider>().phoneNumber.text,
-                context.read<SignUpProvider>().confirmPassword.text,
               );
         },
         child: Text(

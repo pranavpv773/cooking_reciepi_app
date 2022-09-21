@@ -43,7 +43,7 @@ class HomeCardsWidgets extends StatelessWidget {
                 right: 0,
                 top: 1,
                 child: Hero(
-                  tag: 'avathar',
+                  tag: 'avathar$index',
                   child: CircleAvatar(
                     backgroundColor: kWhite,
                     radius: 80,
