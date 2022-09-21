@@ -1,3 +1,4 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
@@ -11,29 +12,35 @@ class BottomNavyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SalomonBottomBar(
-      curve: Curves.ease,
-      currentIndex: context.watch<HomeProvider>().pageIndex,
+    return ConvexAppBar(
+      initialActiveIndex: 1,
+      elevation: 10,
+      shadowColor: kPrimary,
+      activeColor: kPrimary,
+      backgroundColor: kWhite,
+      curve: Curves.linear,
+      style: TabStyle.flip,
+      // currentIndex: context.watch<HomeProvider>().pageIndex,
       onTap: (index) => context.read<HomeProvider>().onTabIndexChange(index),
       items: [
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.home_rounded),
-          title: const Text('Home'),
-          selectedColor: Colors.red,
-          unselectedColor: kPrimary,
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.menu_book_sharp),
-          title: const Text('Add Recipe'),
-          selectedColor: Colors.purpleAccent,
-          unselectedColor: kPrimary,
-        ),
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.settings_applications_sharp),
-          title: const Text('Settings'),
-          selectedColor: Colors.pink,
-          unselectedColor: kPrimary,
-        ),
+        TabItem(
+            icon: Icon(
+              Icons.menu_book_sharp,
+              color: kPrimary,
+            ),
+            title: 'Add Recipe'),
+        TabItem(
+            icon: Icon(
+              Icons.home_rounded,
+              color: kPrimary,
+            ),
+            title: 'Home'),
+        TabItem(
+            icon: Icon(
+              Icons.settings_applications_sharp,
+              color: kPrimary,
+            ),
+            title: 'Settings'),
       ],
     );
   }
