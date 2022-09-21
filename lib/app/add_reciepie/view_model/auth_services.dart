@@ -67,9 +67,9 @@ class AddRecipiAuth with ChangeNotifier {
   getDataFromCloud(BuildContext context) async {
     User? user = context.read<SignUpProvider>().auth.currentUser;
 
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc(user!.email)
+        .doc(FirebaseAuth.instance.currentUser!.email)
         .get()
         .then((value) {
       UserModel.fromMap(value.data()!);

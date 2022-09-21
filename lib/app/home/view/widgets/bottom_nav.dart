@@ -11,35 +11,35 @@ class BottomNavyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConvexAppBar(
-      initialActiveIndex: 1,
+    return BottomNavigationBar(
+      currentIndex: context.watch<HomeProvider>().pageIndex,
       elevation: 5,
-      shadowColor: kTeal,
-      activeColor: kTeal,
-      backgroundColor: kWhite,
-      curve: Curves.linear,
-      style: TabStyle.reactCircle,
+      selectedItemColor: kPrimary,
+      unselectedIconTheme: IconThemeData(color: kWhite),
+      unselectedItemColor: kWhite,
+      backgroundColor: kTeal,
+
       // currentIndex: context.watch<HomeProvider>().pageIndex,
       onTap: (index) => context.read<HomeProvider>().onTabIndexChange(index),
       items: [
-        TabItem(
+        BottomNavigationBarItem(
             icon: Icon(
               Icons.menu_book_sharp,
               color: kPrimary,
             ),
-            title: 'Add Recipe'),
-        TabItem(
+            label: 'Add Recipe'),
+        BottomNavigationBarItem(
             icon: Icon(
               Icons.home_rounded,
               color: kPrimary,
             ),
-            title: 'Home'),
-        TabItem(
+            label: 'Home'),
+        BottomNavigationBarItem(
             icon: Icon(
               Icons.settings_applications_sharp,
               color: kPrimary,
             ),
-            title: 'Settings'),
+            label: 'Settings'),
       ],
     );
   }

@@ -1,23 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/view/login_screen.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
 import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginProvider with ChangeNotifier {
   final email = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final password = TextEditingController();
   bool isLoading = false;
+  // bool isLoggedIn = false;
   onTabLoginFunction(BuildContext context) async {
+    final shared = await SharedPreferences.getInstance();
+
     isLoading = true;
     if (formKey.currentState!.validate()) {
       try {
+        // ignore: use_build_context_synchronously
         await context
             .read<SignUpProvider>()
             .auth
@@ -26,6 +30,7 @@ class LoginProvider with ChangeNotifier {
             .then(
               (value) => {
                 isLoading = false,
+                shared.setBool('login', true),
                 context.read<AddRecipiAuth>().getDataFromCloud(context),
               },
             );
@@ -34,6 +39,7 @@ class LoginProvider with ChangeNotifier {
         password.clear();
       } on FirebaseAuthException catch (e) {
         isLoading = false;
+        // ignore: use_build_context_synchronously
         context.read<SnackTProvider>().errorBox(
               context,
               e.message.toString(),
