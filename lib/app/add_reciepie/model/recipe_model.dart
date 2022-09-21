@@ -3,7 +3,7 @@ class ModelModel {
   String? foodname;
   String? description;
   num? time;
-  bool? veg;
+  String? veg;
   ModelModel({
     this.uid,
     this.foodname,
