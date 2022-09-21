@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "798231959289",
+    "project_id": "recipiapp-5a758",
+    "storage_bucket": "recipiapp-5a758.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798231959289:android:08a7e6c1768bf40c153428",
+        "android_client_info": {
+          "package_name": "com.example.food_reciepi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798231959289-47t085vmgrbfga2mq7tnd0p6okpn7te6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_reciepi",
+            "certificate_hash": "6720b976b785c8cd98700f29cb7b8b7c74239cda"
+          }
+        },
+        {
+          "client_id": "798231959289-id94461k1i0gsk8tsm25atinvmpeit70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxZ06R-YiWkfEgGIbC1YNWujoFfoaILRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798231959289-id94461k1i0gsk8tsm25atinvmpeit70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
