@@ -8,7 +8,7 @@ import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class SignUpProvider with ChangeNotifier {
-  final signUpKey = GlobalKey<FormState>();
+  final signUpFormKey = GlobalKey<FormState>();
   final userName = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
@@ -18,7 +18,7 @@ class SignUpProvider with ChangeNotifier {
   Future<void> signUp(
     BuildContext context,
   ) async {
-    if (signUpKey.currentState!.validate()) {
+    if (signUpFormKey.currentState!.validate()) {
       if (password.text != confirmPassword.text) {
         context
             .read<SnackTProvider>()
@@ -50,7 +50,7 @@ class SignUpProvider with ChangeNotifier {
     loggedUserModel.username = userName.text;
 
     //sending details to fireStore
-    await firebaseFirestore.collection('users').doc(user.uid).set(
+    await firebaseFirestore.collection('users').doc(user.email).set(
           loggedUserModel.toMap(),
         );
     disposeControll();

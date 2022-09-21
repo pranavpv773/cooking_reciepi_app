@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:food_reciepi/app/add_reciepie/view/widgets/bottom_sheet_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 
 class ImageProviderReceipi with ChangeNotifier {
   Future<void> takePhoto(BuildContext context) async {
+    print('object');
     XFile? image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );

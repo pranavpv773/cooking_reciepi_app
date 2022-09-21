@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/login/view_model/login_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
+import 'package:provider/provider.dart';
 import 'widgets/login_button.dart';
 import 'widgets/login_textform.dart';
 
@@ -28,30 +30,32 @@ class LoginScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const LoginTextforms(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Don't have an account?",
-                  style: TextStyle(
-                    color: kPrimary,
-                    fontSize: 15,
+      body: Consumer<LoginProvider>(builder: (context, value, _) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const LoginTextforms(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    style: TextStyle(
+                      color: kPrimary,
+                      fontSize: 15,
+                    ),
                   ),
-                ),
-                const LoginTextButton(
-                  text: "Register",
-                ),
-              ],
+                  const LoginTextButton(
+                    text: "Register",
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      }),
     );
   }
 }

@@ -15,7 +15,7 @@ class ImageProfileAdd extends StatelessWidget {
     return Provider.of<AddRecipiAuth>(context, listen: true)
             .imgstring
             .isNotEmpty
-        ? Consumer<AddRecipiAuth>(
+        ? Consumer<ImageProviderReceipi>(
             builder: (context, value, child) {
               return GestureDetector(
                   onTap: () {
@@ -31,7 +31,7 @@ class ImageProfileAdd extends StatelessWidget {
                         image: DecorationImage(
                           image: MemoryImage(
                             const Base64Decoder().convert(
-                              value.imgstring,
+                              context.read<AddRecipiAuth>().imgstring,
                             ),
                           ),
                           fit: BoxFit.cover,

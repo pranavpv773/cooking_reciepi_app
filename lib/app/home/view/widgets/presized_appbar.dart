@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/login/view_model/login_provider.dart';
+import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 class PresizedAppBarWidget extends StatelessWidget {
   const PresizedAppBarWidget({
@@ -20,11 +23,11 @@ class PresizedAppBarWidget extends StatelessWidget {
           child: Image.asset('assets/men_avathar.png'),
         ),
       ),
-      title: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
-          'Hi Pranav',
-          style: TextStyle(
+          'Hi ${context.read<SignUpProvider>().loggedUserModel.username}',
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 16,
             fontWeight: FontWeight.bold,
