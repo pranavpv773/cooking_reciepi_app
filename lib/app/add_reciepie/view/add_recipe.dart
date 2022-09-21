@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/add_reciepie/view/widgets/description_form_widget.dart';
+import 'package:food_reciepi/app/add_reciepie/view/widgets/dropdown_widget.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/add_recipi_provider.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/sign_up/view/widgets/sign_textform.dart';
@@ -39,7 +40,7 @@ class AddReceipeScreen extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Expanded(
-                            flex: 6,
+                            flex: 10,
                             child: SignUpTextforms(
                               icon: Icons.send_to_mobile_rounded,
                               text: "Time",
@@ -52,43 +53,10 @@ class AddReceipeScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: Row(
-                        children: <Widget>[
+                        children: const <Widget>[
                           Expanded(
-                            flex: 6,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Radio(
-                                  activeColor: Colors.blue,
-                                  value: '0',
-                                  groupValue: context
-                                      .watch<AddRecipiProvider>()
-                                      .radioValue,
-                                  onChanged: (value) {
-                                    context
-                                        .read<AddRecipiProvider>()
-                                        .radioButtonChanges(value!.toString());
-                                  },
-                                ),
-                                const Text(
-                                  "Veg",
-                                ),
-                                Radio(
-                                  value: '1',
-                                  groupValue: context
-                                      .watch<AddRecipiProvider>()
-                                      .radioValue,
-                                  onChanged: (value) {
-                                    context
-                                        .read<AddRecipiProvider>()
-                                        .radioButtonChanges(value.toString());
-                                  },
-                                ),
-                                const Text(
-                                  "Non-Veg",
-                                ),
-                              ],
-                            ),
+                            flex: 2,
+                            child: DropDownWidget(),
                           )
                         ],
                       ),

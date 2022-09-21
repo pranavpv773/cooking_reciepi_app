@@ -18,12 +18,18 @@ class AddRecipiAuth with ChangeNotifier {
   final description = TextEditingController();
   final time = TextEditingController();
   final email = TextEditingController();
+  String? selectItem;
   ReceipiModel receipiModel = ReceipiModel();
   UserModel userLogged = UserModel();
   File? imagefile;
   String imgstring = '';
   changeImage(String imgstring) {
     this.imgstring = imgstring;
+    notifyListeners();
+  }
+
+  void selectTeam(String value) {
+    selectItem = value;
     notifyListeners();
   }
 
