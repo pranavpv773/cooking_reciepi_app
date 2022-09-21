@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/add_recipi_provider.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/view_model/login_provider.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
@@ -29,6 +30,9 @@ class CookieApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (create) => HomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (create) => AddRecipiProvider(),
         ),
       ],
       child: MaterialApp(
