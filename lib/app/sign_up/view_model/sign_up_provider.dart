@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/login/model/user_model.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
@@ -54,8 +57,8 @@ class SignUpProvider with ChangeNotifier {
           loggedUserModel.toMap(),
         );
     disposeControll();
-    // ignore: use_build_context_synchronously
     context.read<SnackTProvider>().successSnack(context);
+    await context.read<AddRecipiAuth>().getDataFromCloud(context);
     await RoutesProvider.removeScreenUntil(screen: const HomeScreen());
   }
 

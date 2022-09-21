@@ -1,10 +1,21 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/constants/colors.dart';
 
 class HomeCardsWidgets extends StatelessWidget {
-  const HomeCardsWidgets({Key? key, required this.index}) : super(key: key);
-  final int index;
+  const HomeCardsWidgets({
+    Key? key,
+    required this.foodName,
+    required this.veg,
+    required this.image,
+    // required this.doc,
+  }) : super(key: key);
+
+  final String foodName;
+  final String veg;
+  final String image;
+  // final QueryDocumentSnapshot<Object?> doc;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -43,11 +54,15 @@ class HomeCardsWidgets extends StatelessWidget {
                 right: 0,
                 top: 1,
                 child: Hero(
-                  tag: 'avathar$index',
+                  tag: foodName,
                   child: CircleAvatar(
                     backgroundColor: kWhite,
                     radius: 80,
-                    backgroundImage: NetworkImage(images[index]),
+                    backgroundImage: MemoryImage(
+                      const Base64Decoder().convert(
+                        image,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -60,7 +75,7 @@ class HomeCardsWidgets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Food Name',
+                        foodName,
                         style: TextStyle(
                           fontSize: 32,
                           fontFamily: 'Nunito',
@@ -68,7 +83,7 @@ class HomeCardsWidgets extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Type',
+                        veg,
                         style: TextStyle(
                           color: kWhite,
                         ),

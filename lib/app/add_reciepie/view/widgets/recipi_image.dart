@@ -24,8 +24,8 @@ class ImageProfileAdd extends StatelessWidget {
                         .showBottomSheet(context);
                   },
                   child: Container(
-                    width: MediaQuery.of(context).size.width / 3.5,
-                    height: MediaQuery.of(context).size.height / 7,
+                    width: MediaQuery.of(context).size.width / 3,
+                    height: MediaQuery.of(context).size.height / 6,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(80),
                         image: DecorationImage(
