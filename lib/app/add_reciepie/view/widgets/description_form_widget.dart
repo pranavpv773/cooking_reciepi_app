@@ -5,12 +5,10 @@ class DescriptionTextforms extends StatelessWidget {
   const DescriptionTextforms({
     Key? key,
     required this.icon,
-    required this.text,
     required this.vertical,
     required this.controller,
   }) : super(key: key);
   final IconData icon;
-  final String text;
   final double vertical;
   final TextEditingController controller;
 
