@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class BottomNavyWidget extends StatelessWidget {
   const BottomNavyWidget({
@@ -14,12 +13,12 @@ class BottomNavyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConvexAppBar(
       initialActiveIndex: 1,
-      elevation: 10,
-      shadowColor: kPrimary,
-      activeColor: kPrimary,
+      elevation: 5,
+      shadowColor: kTeal,
+      activeColor: kTeal,
       backgroundColor: kWhite,
       curve: Curves.linear,
-      style: TabStyle.flip,
+      style: TabStyle.reactCircle,
       // currentIndex: context.watch<HomeProvider>().pageIndex,
       onTap: (index) => context.read<HomeProvider>().onTabIndexChange(index),
       items: [

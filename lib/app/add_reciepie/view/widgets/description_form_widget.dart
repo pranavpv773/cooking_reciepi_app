@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/constants/colors.dart';
 
-class SignUpTextforms extends StatelessWidget {
-  const SignUpTextforms({
+class DescriptionTextforms extends StatelessWidget {
+  const DescriptionTextforms({
     Key? key,
     required this.icon,
     required this.text,
@@ -30,18 +30,20 @@ class SignUpTextforms extends StatelessWidget {
           }
         },
         controller: controller,
+        keyboardType: TextInputType.multiline,
+        maxLines: 15,
         style: TextStyle(
-          color: kTeal,
+          color: kPrimary,
           fontSize: 18,
         ),
         decoration: InputDecoration(
           fillColor: kWhite,
           filled: true,
           prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 0.0),
             child: Icon(
-              icon,
-              color: kTeal,
+              Icons.description,
+              color: kPrimary,
             ),
           ),
           enabledBorder: OutlineInputBorder(
@@ -65,10 +67,10 @@ class SignUpTextforms extends StatelessWidget {
               width: 2.0,
             ),
           ),
-          hintText: text,
-          hintStyle: TextStyle(
+          hintText: 'Description',
+          hintStyle: const TextStyle(
             fontSize: 15,
-            color: kTeal,
+            color: Colors.teal,
           ),
         ),
       ),

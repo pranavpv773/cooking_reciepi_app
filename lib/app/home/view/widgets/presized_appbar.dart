@@ -9,7 +9,7 @@ class PresizedAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 15,
+      elevation: 5,
       shadowColor: kPrimary,
       backgroundColor: kWhite,
       leading: Padding(

@@ -24,14 +24,12 @@ class SignupForm extends StatelessWidget {
               SignUpTextforms(
                 icon: Icons.person_outline_outlined,
                 text: "UserName",
-                obscureText: false,
                 vertical: 20,
                 controller: context.read<SignUpProvider>().userName,
               ),
               SignUpTextforms(
                 icon: Icons.mail_outline_sharp,
                 text: "Email",
-                obscureText: false,
                 vertical: 15,
                 controller: context.read<SignUpProvider>().email,
               ),
