@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
+import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
 
 class DropDownWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class DropDownWidget extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
         child: DropdownButton<String>(
+          focusColor: kPrimary,
           value: run.selectItem,
           items: <String>['Juice', 'Hot', 'Breakfast', 'Dinner', 'Curry']
               .map((String value) {

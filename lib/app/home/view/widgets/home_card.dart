@@ -28,10 +28,10 @@ class HomeCardsWidgets extends StatelessWidget {
                 bottom: 0,
                 child: Material(
                   borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(100),
-                    topRight: Radius.circular(50),
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
                   elevation: 10,
                   child: Container(
@@ -40,19 +40,19 @@ class HomeCardsWidgets extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: kPrimary,
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(70),
-                        topRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
                       ),
                     ),
                   ),
                 ),
               ),
               Positioned(
-                left: 0,
-                right: 0,
-                top: 1,
+                left: 20,
+                // right: 0,
+                top: 90,
                 child: Hero(
                   tag: foodName,
                   child: CircleAvatar(
@@ -67,9 +67,9 @@ class HomeCardsWidgets extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 40,
-                left: 20,
-                right: 0,
+                bottom: 80,
+                // left: 20,
+                right: 40,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

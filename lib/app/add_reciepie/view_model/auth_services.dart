@@ -46,7 +46,7 @@ class AddRecipiAuth with ChangeNotifier {
         receipiModel.foodname = foodname.text;
         receipiModel.description = description.text;
         receipiModel.time = time.text;
-        receipiModel.veg = "Add email";
+        receipiModel.veg = selectItem;
         receipiModel.uid = user!.uid;
         receipiModel.image = imgstring;
 
@@ -60,6 +60,7 @@ class AddRecipiAuth with ChangeNotifier {
             )
             .then((value) {
           context.read<HomeProvider>().onTabIndexChange(1);
+          disposeController();
           RoutesProvider.removeScreenUntil(screen: const HomeScreen());
         });
 
@@ -83,5 +84,12 @@ class AddRecipiAuth with ChangeNotifier {
 
       RoutesProvider.removeScreenUntil(screen: const HomeScreen());
     });
+  }
+
+  disposeController() {
+    foodname.clear();
+    time.clear();
+    description.clear();
+    imgstring = '';
   }
 }
