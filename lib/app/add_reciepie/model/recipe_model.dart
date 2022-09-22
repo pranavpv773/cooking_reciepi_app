@@ -7,7 +7,7 @@ class ReceipiModel {
   String? time;
   String? veg;
   String? image;
-  IngredientModel? ingredientModel;
+  IngredientListModel? ingredientModel;
   ReceipiModel({
     this.uid,
     this.foodname,
@@ -28,7 +28,7 @@ class ReceipiModel {
       time: map['time'],
       veg: map['veg'],
       image: map['image'],
-      ingredientModel: map['ingredientModel'],
+      ingredientModel: IngredientListModel.fromMap(map['ingredientModel']),
     );
   }
 
@@ -41,7 +41,7 @@ class ReceipiModel {
       'time': time,
       'veg': veg,
       'image': image,
-      'ingredientModel': ingredientModel,
+      'ingredientModel': ingredientModel!.toMap(),
     };
   }
 }
