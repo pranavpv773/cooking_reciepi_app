@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/home/view/widgets/home_card.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +32,12 @@ class ReciepeScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: HomeCardsWidgets(
+                    description: snapshot.data!.docs[index]['description'],
                     foodName: snapshot.data!.docs[index]['foodname'],
                     image: snapshot.data!.docs[index]['image'],
                     veg: snapshot.data!.docs[index]['veg'],
+                    time: snapshot.data!.docs[index]['time'],
+                    doc: snapshot.data!.docs[index],
                   ),
                 );
               },

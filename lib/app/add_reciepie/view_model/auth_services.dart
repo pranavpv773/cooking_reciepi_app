@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_reciepi/app/add_reciepie/model/ingredient_model.dart';
 import 'package:food_reciepi/app/add_reciepie/model/recipe_model.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/ingredient_provider.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
@@ -23,6 +24,8 @@ class AddRecipiAuth with ChangeNotifier {
   String? selectItem;
   ReceipiModel receipiModel = ReceipiModel();
   UserModel userLogged = UserModel();
+  IngredientListModel ingredientListModel = IngredientListModel();
+
   File? imagefile;
   String imgstring = '';
   changeImage(String imgstring) {
@@ -99,6 +102,20 @@ class AddRecipiAuth with ChangeNotifier {
       userLogged = UserModel.fromMap(value.data()!);
 
       RoutesProvider.removeScreenUntil(screen: const HomeScreen());
+    });
+  }
+
+  getListFromMap(BuildContext context, String uid) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('receipi')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('ingredientList')
+        .doc(uid)
+        .get()
+        .then((value) {
+      print(value.data());
     });
   }
 

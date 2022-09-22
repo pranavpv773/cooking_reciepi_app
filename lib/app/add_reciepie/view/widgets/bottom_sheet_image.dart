@@ -28,7 +28,6 @@ class ImageBottomSheet extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  print('came');
                   context.read<ImageProviderReceipi>().takecamera(context);
                 },
                 icon: Icon(
@@ -38,7 +37,6 @@ class ImageBottomSheet extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  print('galle');
                   context.read<ImageProviderReceipi>().takePhoto(context);
                 },
                 icon: Icon(

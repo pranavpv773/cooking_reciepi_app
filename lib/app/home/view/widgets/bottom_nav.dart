@@ -1,4 +1,3 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';

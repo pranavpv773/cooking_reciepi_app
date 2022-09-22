@@ -19,6 +19,7 @@ class PasswordTextFormWidget extends StatelessWidget {
           } else if (value.length < 6) {
             return " Password is less than six";
           }
+          return null;
         },
         controller: context.read<LoginProvider>().password,
         style: TextStyle(
@@ -31,7 +32,7 @@ class PasswordTextFormWidget extends StatelessWidget {
           fillColor: kWhite,
           filled: true,
           prefixIcon: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Icon(
               Icons.key,
               color: kPrimary,
