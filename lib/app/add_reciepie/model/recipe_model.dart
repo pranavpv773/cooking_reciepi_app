@@ -1,3 +1,5 @@
+import 'package:food_reciepi/app/add_reciepie/model/ingredient_model.dart';
+
 class ReceipiModel {
   String? uid;
   String? foodname;
@@ -5,6 +7,7 @@ class ReceipiModel {
   String? time;
   String? veg;
   String? image;
+  IngredientModel? ingredientModel;
   ReceipiModel({
     this.uid,
     this.foodname,
@@ -12,6 +15,7 @@ class ReceipiModel {
     this.time,
     this.veg,
     this.image,
+    this.ingredientModel,
   });
 
 //data from Server
@@ -24,6 +28,7 @@ class ReceipiModel {
       time: map['time'],
       veg: map['veg'],
       image: map['image'],
+      ingredientModel: map['ingredientModel'],
     );
   }
 
@@ -32,9 +37,11 @@ class ReceipiModel {
     return {
       'uid': uid,
       'foodname': foodname,
+      'description': description,
       'time': time,
       'veg': veg,
       'image': image,
+      'ingredientModel': ingredientModel,
     };
   }
 }
