@@ -10,6 +10,7 @@ import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/model/user_model.dart';
 import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
+import 'package:food_reciepi/constants/image_text.dart';
 import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,9 @@ class AddRecipiAuth with ChangeNotifier {
             .read<SnackTProvider>()
             .errorBox(context, 'Please Add Ingredients');
       } else {
+        if (imgstring == '') {
+          imgstring = TempImage.imageTemp;
+        }
         try {
           await context
               .read<IngredientProvider>()

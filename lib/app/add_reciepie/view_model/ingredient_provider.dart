@@ -33,38 +33,33 @@ class IngredientProvider with ChangeNotifier {
     BuildContext context,
   ) async {
     try {
-      try {
-        // calling our fireStore
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-        User? user = context.read<SignUpProvider>().auth.currentUser;
-        //calling our userModel
+      // calling our fireStore
+      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+      //calling our userModel
 
-        ingredientListModel.ingredient1 = ingredient1.text;
-        ingredientListModel.quantity1 = double.parse(quantity1.text);
-        ingredientListModel.ingredient2 = ingredient2.text;
-        ingredientListModel.quantity2 = double.parse(quantity2.text);
-        ingredientListModel.ingredient3 = ingredient3.text;
-        ingredientListModel.quantity3 = double.parse(quantity3.text);
-        ingredientListModel.ingredient4 = ingredient4.text;
-        ingredientListModel.quantity4 = double.parse(quantity4.text);
-        ingredientListModel.ingredient5 = ingredient5.text;
-        ingredientListModel.quantity5 = double.parse(quantity5.text);
+      ingredientListModel.ingredient1 = ingredient1.text.trim();
+      ingredientListModel.quantity1 = double.parse(quantity1.text.trim());
+      ingredientListModel.ingredient2 = ingredient2.text.trim();
+      ingredientListModel.quantity2 = double.parse(quantity2.text.trim());
+      ingredientListModel.ingredient3 = ingredient3.text.trim();
+      ingredientListModel.quantity3 = double.parse(quantity3.text.trim());
+      ingredientListModel.ingredient4 = ingredient4.text.trim();
+      ingredientListModel.quantity4 = double.parse(quantity4.text.trim());
+      ingredientListModel.ingredient5 = ingredient5.text.trim();
+      ingredientListModel.quantity5 = double.parse(quantity5.text.trim());
 
-        //sending details to fireStore
-        await firebaseFirestore
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('receipi')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('ingredientList')
-            .add(
-              ingredientListModel.toMap(),
-            )
-            .then((value) => ingredientDisposeController());
-      } on FirebaseException catch (e) {
-        context.read<SnackTProvider>().errorBox(context, e.message.toString());
-      }
-    } on FormatException catch (e) {
+      //sending details to fireStore
+      await firebaseFirestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('receipi')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('ingredientList')
+          .add(
+            ingredientListModel.toMap(),
+          )
+          .then((value) => ingredientDisposeController());
+    } on FirebaseException catch (e) {
       context.read<SnackTProvider>().errorBox(context, e.message.toString());
     }
   }
