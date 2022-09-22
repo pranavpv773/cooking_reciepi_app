@@ -28,7 +28,7 @@ class ReceipiModel {
       time: map['time'],
       veg: map['veg'],
       image: map['image'],
-      ingredientModel: map['ingredientModel'],
+      ingredientModel: IngredientModel.fromMap(map['ingredientModel']),
     );
   }
 
@@ -41,7 +41,7 @@ class ReceipiModel {
       'time': time,
       'veg': veg,
       'image': image,
-      'ingredientModel': ingredientModel,
+      'ingredientModel': ingredientModel!.toMap(),
     };
   }
 }

@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_reciepi/app/add_reciepie/model/ingredient_model.dart';
 import 'package:food_reciepi/app/add_reciepie/model/recipe_model.dart';
+import 'package:food_reciepi/app/add_reciepie/view_model/ingredient_provider.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/home/view_model/home_provider.dart';
 import 'package:food_reciepi/app/login/model/user_model.dart';
@@ -38,17 +40,19 @@ class AddRecipiAuth with ChangeNotifier {
   ) async {
     if (registerFormKey.currentState!.validate()) {
       try {
+        await context.read<IngredientProvider>().addIngredientToRecipi(context);
         // calling our fireStore
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
         User? user = context.read<SignUpProvider>().auth.currentUser;
         //calling our userModel
-
         receipiModel.foodname = foodname.text;
         receipiModel.description = description.text;
         receipiModel.time = time.text;
         receipiModel.veg = selectItem;
         receipiModel.uid = user!.uid;
         receipiModel.image = imgstring;
+        receipiModel.ingredientModel =
+            context.read<IngredientProvider>().ingredientModel;
 
         //sending details to fireStore
         await firebaseFirestore
@@ -61,6 +65,7 @@ class AddRecipiAuth with ChangeNotifier {
             .then((value) {
           context.read<HomeProvider>().onTabIndexChange(1);
           disposeController();
+          context.read<IngredientProvider>().ingredientDisposeController();
           RoutesProvider.removeScreenUntil(screen: const HomeScreen());
         });
 
@@ -72,8 +77,6 @@ class AddRecipiAuth with ChangeNotifier {
   }
 
   getDataFromCloud(BuildContext context) async {
-    User? user = context.read<SignUpProvider>().auth.currentUser;
-
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.email)
