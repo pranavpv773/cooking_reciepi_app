@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/home/view/widgets/home_card.dart';
 import 'package:provider/provider.dart';
 

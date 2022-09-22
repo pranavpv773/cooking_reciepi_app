@@ -2,7 +2,6 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
 import 'package:food_reciepi/app/login/view/login_screen.dart';
 import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';

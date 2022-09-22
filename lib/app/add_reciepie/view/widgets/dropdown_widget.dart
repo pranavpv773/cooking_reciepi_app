@@ -14,8 +14,11 @@ class DropDownWidget extends StatelessWidget {
         child: DropdownButton<String>(
           focusColor: kPrimary,
           value: run.selectItem,
-          items: <String>['Juice', 'Hot', 'Breakfast', 'Dinner', 'Curry']
-              .map((String value) {
+          items: <String>[
+            'Hours',
+            'minutes',
+            'Seconds',
+          ].map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/add_reciepie/view/widgets/description_form_widget.dart';
 import 'package:food_reciepi/app/add_reciepie/view/widgets/dropdown_widget.dart';
-import 'package:food_reciepi/app/add_reciepie/view_model/add_recipi_provider.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/ingredient_provider.dart';
 import 'package:food_reciepi/app/sign_up/view/widgets/sign_textform.dart';
 import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
-
 import 'widgets/recipi_image.dart';
 
 class AddReceipeScreen extends StatelessWidget {
@@ -15,7 +13,6 @@ class AddReceipeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -70,7 +67,9 @@ class AddReceipeScreen extends StatelessWidget {
                   controller: context.read<AddRecipiAuth>().description,
                 ),
                 const AddIngredientExpansion(),
-                const Center(child: ButtonWidget(name: 'ADD RECIPI')),
+                const Center(
+                  child: ButtonWidget(name: 'ADD RECIPI'),
+                ),
                 const SizedBox(
                   height: 80,
                 ),

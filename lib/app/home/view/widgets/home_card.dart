@@ -22,7 +22,7 @@ class HomeCardsWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutesProvider.nextScreen(screen: DetailScreen());
+        RoutesProvider.nextScreen(screen: const DetailScreen());
       },
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.35,

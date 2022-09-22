@@ -1,16 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_reciepi/app/add_reciepie/model/ingredient_model.dart';
-import 'package:food_reciepi/app/add_reciepie/model/recipe_model.dart';
-import 'package:food_reciepi/app/home/view/home_screen.dart';
-import 'package:food_reciepi/app/home/view_model/home_provider.dart';
-import 'package:food_reciepi/app/login/model/user_model.dart';
-import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/app/utility/view_model/snack_provider.dart';
-import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class IngredientProvider with ChangeNotifier {

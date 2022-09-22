@@ -48,7 +48,7 @@ class LoginTextforms extends StatelessWidget {
                       ? const Text(
                           "LOGIN",
                         )
-                      : CircularProgressIndicator(),
+                      : const CircularProgressIndicator(),
                 ),
               ),
             ],

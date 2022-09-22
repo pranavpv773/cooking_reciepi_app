@@ -18,7 +18,6 @@ class AddRecipiProvider with ChangeNotifier {
       default:
         choice = null;
     }
-    print(choice);
     notifyListeners();
   }
 }
