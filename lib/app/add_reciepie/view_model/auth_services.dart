@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:food_reciepi/app/add_reciepie/model/ingredient_model.dart';
 import 'package:food_reciepi/app/add_reciepie/model/recipe_model.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/ingredient_provider.dart';
 import 'package:food_reciepi/app/home/view/home_screen.dart';
@@ -39,39 +38,49 @@ class AddRecipiAuth with ChangeNotifier {
     BuildContext context,
   ) async {
     if (registerFormKey.currentState!.validate()) {
-      try {
-        await context.read<IngredientProvider>().addIngredientToRecipi(context);
-        // calling our fireStore
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-        User? user = context.read<SignUpProvider>().auth.currentUser;
-        //calling our userModel
-        receipiModel.foodname = foodname.text;
-        receipiModel.description = description.text;
-        receipiModel.time = time.text;
-        receipiModel.veg = selectItem;
-        receipiModel.uid = user!.uid;
-        receipiModel.image = imgstring;
-        receipiModel.ingredientModel =
-            context.read<IngredientProvider>().ingredientModel;
+      if (context.read<IngredientProvider>().ingredient1.text == '') {
+        context
+            .read<SnackTProvider>()
+            .errorBox(context, 'Please Add Ingredients');
+      } else {
+        try {
+          await context
+              .read<IngredientProvider>()
+              .addIngredientListToRecipi(context);
+          // calling our fireStore
+          FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+          User? user = context.read<SignUpProvider>().auth.currentUser;
+          //calling our userModel
+          receipiModel.foodname = foodname.text;
+          receipiModel.description = description.text;
+          receipiModel.time = time.text;
+          receipiModel.veg = selectItem;
+          receipiModel.uid = user!.uid;
+          receipiModel.image = imgstring;
+          receipiModel.ingredientModel =
+              context.read<IngredientProvider>().ingredientListModel;
 
-        //sending details to fireStore
-        await firebaseFirestore
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('receipi')
-            .add(
-              receipiModel.toMap(),
-            )
-            .then((value) {
-          context.read<HomeProvider>().onTabIndexChange(1);
-          disposeController();
-          context.read<IngredientProvider>().ingredientDisposeController();
-          RoutesProvider.removeScreenUntil(screen: const HomeScreen());
-        });
+          //sending details to fireStore
+          await firebaseFirestore
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .collection('receipi')
+              .add(
+                receipiModel.toMap(),
+              )
+              .then((value) {
+            context.read<HomeProvider>().onTabIndexChange(1);
+            disposeController();
+            context.read<IngredientProvider>().ingredientDisposeController();
+            RoutesProvider.removeScreenUntil(screen: const HomeScreen());
+          });
 
-        context.read<SnackTProvider>().successSnack(context);
-      } on FirebaseException catch (e) {
-        context.read<SnackTProvider>().errorBox(context, e.message.toString());
+          context.read<SnackTProvider>().successSnack(context);
+        } on FirebaseException catch (e) {
+          context
+              .read<SnackTProvider>()
+              .errorBox(context, e.message.toString());
+        }
       }
     }
   }

@@ -5,6 +5,7 @@ class SignUpTextforms extends StatelessWidget {
   const SignUpTextforms({
     Key? key,
     required this.icon,
+    this.textType,
     required this.text,
     required this.vertical,
     required this.controller,
@@ -13,7 +14,7 @@ class SignUpTextforms extends StatelessWidget {
   final String text;
   final double vertical;
   final TextEditingController controller;
-
+  final TextInputType? textType;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,6 +30,7 @@ class SignUpTextforms extends StatelessWidget {
             return 'Please fill this field';
           }
         },
+        keyboardType: textType ?? TextInputType.name,
         controller: controller,
         style: TextStyle(
           color: kTeal,

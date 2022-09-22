@@ -14,6 +14,8 @@ import 'package:food_reciepi/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class IngredientProvider with ChangeNotifier {
+  final ingredientFormKey = GlobalKey<FormState>();
+
   final ingredient1 = TextEditingController();
   final ingredient2 = TextEditingController();
   final ingredient3 = TextEditingController();
@@ -25,74 +27,44 @@ class IngredientProvider with ChangeNotifier {
   final quantity4 = TextEditingController();
   final quantity5 = TextEditingController();
 
-  IngredientModel ingredientModel = IngredientModel();
   IngredientListModel ingredientListModel = IngredientListModel();
-  Future<void> addIngredientToRecipi(
-    BuildContext context,
-  ) async {
-    await addIngredientListToRecipi(context);
-    try {
-      print('ingredients');
-
-      // calling our fireStore
-      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-      User? user = context.read<SignUpProvider>().auth.currentUser;
-      //calling our userModel
-
-      ingredientModel.ingredientListModel = ingredientListModel;
-
-      ingredientModel.uid = user!.uid;
-
-      //sending details to fireStore
-      await firebaseFirestore
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('receipi')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('ingredients')
-          .add(
-            ingredientModel.toMap(),
-          );
-    } on FirebaseException catch (e) {
-      context.read<SnackTProvider>().errorBox(context, e.message.toString());
-    }
-  }
 
   Future<void> addIngredientListToRecipi(
     BuildContext context,
   ) async {
     try {
-      print('ingredientsList');
-      // calling our fireStore
-      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-      User? user = context.read<SignUpProvider>().auth.currentUser;
-      //calling our userModel
+      try {
+        // calling our fireStore
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+        User? user = context.read<SignUpProvider>().auth.currentUser;
+        //calling our userModel
 
-      ingredientListModel.ingredient1 = ingredient1.text;
-      ingredientListModel.quantity1 = double.parse(quantity1.text);
-      ingredientListModel.ingredient2 = ingredient2.text;
-      ingredientListModel.quantity2 = double.parse(quantity2.text);
-      ingredientListModel.ingredient3 = ingredient3.text;
-      ingredientListModel.quantity3 = double.parse(quantity3.text);
-      ingredientListModel.ingredient4 = ingredient4.text;
-      ingredientListModel.quantity4 = double.parse(quantity4.text);
-      ingredientListModel.ingredient5 = ingredient5.text;
-      ingredientListModel.quantity5 = double.parse(quantity5.text);
-      ingredientModel.uid = user!.uid;
+        ingredientListModel.ingredient1 = ingredient1.text;
+        ingredientListModel.quantity1 = double.parse(quantity1.text);
+        ingredientListModel.ingredient2 = ingredient2.text;
+        ingredientListModel.quantity2 = double.parse(quantity2.text);
+        ingredientListModel.ingredient3 = ingredient3.text;
+        ingredientListModel.quantity3 = double.parse(quantity3.text);
+        ingredientListModel.ingredient4 = ingredient4.text;
+        ingredientListModel.quantity4 = double.parse(quantity4.text);
+        ingredientListModel.ingredient5 = ingredient5.text;
+        ingredientListModel.quantity5 = double.parse(quantity5.text);
 
-      //sending details to fireStore
-      await firebaseFirestore
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('receipi')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('ingredients')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('ingredientList')
-          .add(
-            ingredientListModel.toMap(),
-          );
-    } on FirebaseException catch (e) {
+        //sending details to fireStore
+        await firebaseFirestore
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.email)
+            .collection('receipi')
+            .doc(FirebaseAuth.instance.currentUser!.email)
+            .collection('ingredientList')
+            .add(
+              ingredientListModel.toMap(),
+            )
+            .then((value) => ingredientDisposeController());
+      } on FirebaseException catch (e) {
+        context.read<SnackTProvider>().errorBox(context, e.message.toString());
+      }
+    } on FormatException catch (e) {
       context.read<SnackTProvider>().errorBox(context, e.message.toString());
     }
   }

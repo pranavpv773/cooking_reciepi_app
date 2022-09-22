@@ -5,7 +5,6 @@ import 'package:food_reciepi/app/add_reciepie/view_model/add_recipi_provider.dar
 import 'package:food_reciepi/app/add_reciepie/view_model/auth_services.dart';
 import 'package:food_reciepi/app/add_reciepie/view_model/ingredient_provider.dart';
 import 'package:food_reciepi/app/sign_up/view/widgets/sign_textform.dart';
-import 'package:food_reciepi/app/sign_up/view_model/sign_up_provider.dart';
 import 'package:food_reciepi/constants/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +42,7 @@ class AddReceipeScreen extends StatelessWidget {
                           Expanded(
                             flex: 10,
                             child: SignUpTextforms(
+                              textType: TextInputType.number,
                               icon: Icons.send_to_mobile_rounded,
                               text: "Time",
                               vertical: 15,
@@ -69,48 +69,7 @@ class AddReceipeScreen extends StatelessWidget {
                   vertical: 15,
                   controller: context.read<AddRecipiAuth>().description,
                 ),
-                ExpansionTile(
-                  title: const Text(
-                    'INGREDIENTS',
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-                  ),
-                  children: <Widget>[
-                    IngredientWidget(
-                      ingredientController:
-                          context.read<IngredientProvider>().ingredient1,
-                      quantityController:
-                          context.read<IngredientProvider>().quantity1,
-                    ),
-                    IngredientWidget(
-                        ingredientController:
-                            context.read<IngredientProvider>().ingredient2,
-                        quantityController:
-                            context.read<IngredientProvider>().quantity2),
-                    IngredientWidget(
-                        ingredientController:
-                            context.read<IngredientProvider>().ingredient3,
-                        quantityController:
-                            context.read<IngredientProvider>().quantity3),
-                    IngredientWidget(
-                        ingredientController:
-                            context.read<IngredientProvider>().ingredient4,
-                        quantityController:
-                            context.read<IngredientProvider>().quantity4),
-                    IngredientWidget(
-                        ingredientController:
-                            context.read<IngredientProvider>().ingredient5,
-                        quantityController:
-                            context.read<IngredientProvider>().quantity5),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'INGREDIENTS',
-                    style: TextStyle(color: kTeal),
-                  ),
-                ),
+                const AddIngredientExpansion(),
                 const Center(child: ButtonWidget(name: 'ADD RECIPI')),
                 const SizedBox(
                   height: 80,
@@ -120,6 +79,44 @@ class AddReceipeScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AddIngredientExpansion extends StatelessWidget {
+  const AddIngredientExpansion({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: const Text(
+        'ADD INGREDIENTS',
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+      ),
+      children: <Widget>[
+        IngredientWidget(
+          ingredientController: context.read<IngredientProvider>().ingredient1,
+          quantityController: context.read<IngredientProvider>().quantity1,
+        ),
+        IngredientWidget(
+            ingredientController:
+                context.read<IngredientProvider>().ingredient2,
+            quantityController: context.read<IngredientProvider>().quantity2),
+        IngredientWidget(
+            ingredientController:
+                context.read<IngredientProvider>().ingredient3,
+            quantityController: context.read<IngredientProvider>().quantity3),
+        IngredientWidget(
+            ingredientController:
+                context.read<IngredientProvider>().ingredient4,
+            quantityController: context.read<IngredientProvider>().quantity4),
+        IngredientWidget(
+            ingredientController:
+                context.read<IngredientProvider>().ingredient5,
+            quantityController: context.read<IngredientProvider>().quantity5),
+      ],
     );
   }
 }
@@ -159,6 +156,7 @@ class IngredientWidget extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: SignUpTextforms(
+                  textType: TextInputType.number,
                   icon: Icons.view_comfortable_outlined,
                   text: "quantity",
                   vertical: 15,

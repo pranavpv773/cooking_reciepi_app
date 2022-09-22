@@ -1,33 +1,4 @@
-class IngredientModel {
-  String? uid;
-  IngredientListModel? ingredientListModel;
-
-  IngredientModel({
-    this.ingredientListModel,
-    this.uid,
-  });
-
-//data from Server
-
-  factory IngredientModel.fromMap(Map<String, dynamic> map) {
-    return IngredientModel(
-      uid: map['uid'] ?? '',
-      ingredientListModel:
-          IngredientListModel.fromMap(map['ingredientListModel']),
-    );
-  }
-
-  // sending data to server
-  Map<String, dynamic> toMap() {
-    return {
-      'uid': uid,
-      'ingredientListModel': ingredientListModel!.toMap(),
-    };
-  }
-}
-
 class IngredientListModel {
-  String? uid;
   String? ingredient1;
   double? quantity1;
   String? ingredient2;
@@ -50,14 +21,12 @@ class IngredientListModel {
     this.quantity4,
     this.ingredient5,
     this.quantity5,
-    this.uid,
   });
 
 //data from Server
 
   factory IngredientListModel.fromMap(Map<String, dynamic> map) {
     return IngredientListModel(
-      uid: map['uid'] ?? '',
       ingredient1: map['ingredient1'] ?? '',
       quantity1: map['quantity1'] ?? 0.0,
       ingredient2: map['ingredient2'] ?? '',
@@ -74,7 +43,6 @@ class IngredientListModel {
   // sending data to server
   Map<String, dynamic> toMap() {
     return {
-      'uid': uid ?? '',
       'ingredient1': ingredient1 ?? '',
       'quantity1': quantity1 ?? 0.0,
       'ingredient2': ingredient2 ?? '',

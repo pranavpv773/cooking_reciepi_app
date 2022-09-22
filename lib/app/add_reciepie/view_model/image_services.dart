@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 
 class ImageProviderReceipi with ChangeNotifier {
   Future<void> takePhoto(BuildContext context) async {
-    print('object');
     XFile? image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
