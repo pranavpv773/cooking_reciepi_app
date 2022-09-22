@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_reciepi/app/detail_screen/view/detail_screen.dart';
 import 'package:food_reciepi/constants/colors.dart';
@@ -9,20 +10,32 @@ class HomeCardsWidgets extends StatelessWidget {
     Key? key,
     required this.foodName,
     required this.veg,
+    required this.doc,
     required this.image,
-    // required this.doc,
+    required this.description,
+    required this.time,
   }) : super(key: key);
 
   final String foodName;
   final String veg;
+  final String description;
   final String image;
-  // final QueryDocumentSnapshot<Object?> doc;
+  final String time;
+  final QueryDocumentSnapshot<Object?> doc;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutesProvider.nextScreen(screen: const DetailScreen());
+        RoutesProvider.nextScreen(
+            screen: DetailScreen(
+          uid: doc.id,
+          hours: veg,
+          time: time,
+          name: foodName,
+          image: image,
+          description: description,
+        ));
       },
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.35,
