@@ -14,6 +14,7 @@ class DescriptionTextforms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.only(
         top: vertical,
@@ -38,7 +39,7 @@ class DescriptionTextforms extends StatelessWidget {
           fillColor: kWhite,
           filled: true,
           prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+            padding: EdgeInsets.only(bottom: height / 2.8),
             child: Icon(
               Icons.description,
               color: kPrimary,

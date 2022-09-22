@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_reciepi/app/add_reciepie/view/add_recipe.dart';
-import 'package:food_reciepi/app/home/view_model/home_provider.dart';
-import 'package:food_reciepi/routes/routes.dart';
-import 'package:provider/provider.dart';
 
 class HomeNull extends StatelessWidget {
   const HomeNull({
@@ -19,7 +15,7 @@ class HomeNull extends StatelessWidget {
             image: AssetImage(
               'assets/food/empty_lottie.gif',
             ),
-            fit: BoxFit.cover),
+            fit: BoxFit.contain),
       ),
       child: Center(
         child: Column(

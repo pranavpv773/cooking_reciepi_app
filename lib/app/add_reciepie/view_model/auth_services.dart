@@ -18,12 +18,18 @@ class AddRecipiAuth with ChangeNotifier {
   final description = TextEditingController();
   final time = TextEditingController();
   final email = TextEditingController();
+  String? selectItem;
   ReceipiModel receipiModel = ReceipiModel();
   UserModel userLogged = UserModel();
   File? imagefile;
   String imgstring = '';
   changeImage(String imgstring) {
     this.imgstring = imgstring;
+    notifyListeners();
+  }
+
+  void selectTeam(String value) {
+    selectItem = value;
     notifyListeners();
   }
 
@@ -40,7 +46,7 @@ class AddRecipiAuth with ChangeNotifier {
         receipiModel.foodname = foodname.text;
         receipiModel.description = description.text;
         receipiModel.time = time.text;
-        receipiModel.veg = "Add email";
+        receipiModel.veg = selectItem;
         receipiModel.uid = user!.uid;
         receipiModel.image = imgstring;
 
@@ -54,6 +60,7 @@ class AddRecipiAuth with ChangeNotifier {
             )
             .then((value) {
           context.read<HomeProvider>().onTabIndexChange(1);
+          disposeController();
           RoutesProvider.removeScreenUntil(screen: const HomeScreen());
         });
 
@@ -67,9 +74,9 @@ class AddRecipiAuth with ChangeNotifier {
   getDataFromCloud(BuildContext context) async {
     User? user = context.read<SignUpProvider>().auth.currentUser;
 
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc(user!.email)
+        .doc(FirebaseAuth.instance.currentUser!.email)
         .get()
         .then((value) {
       UserModel.fromMap(value.data()!);
@@ -77,5 +84,12 @@ class AddRecipiAuth with ChangeNotifier {
 
       RoutesProvider.removeScreenUntil(screen: const HomeScreen());
     });
+  }
+
+  disposeController() {
+    foodname.clear();
+    time.clear();
+    description.clear();
+    imgstring = '';
   }
 }
