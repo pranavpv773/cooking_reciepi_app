@@ -111,10 +111,10 @@ class AddRecipiAuth with ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection('receipi')
         .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection('ingredientList')
-        .doc(uid)
         .get()
         .then((value) {
+      ReceipiModel.fromMap(value.data()!);
+      receipiModel = ReceipiModel.fromMap(value.data()!);
       print(value.data());
     });
   }
