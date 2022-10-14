@@ -19,9 +19,8 @@ class IngredientWidgetCard extends StatelessWidget {
                   flex: 6,
                   child: Text(context
                       .read<AddRecipiAuth>()
-                      .receipiModel
-                      .ingredientModel!
-                      .quantity1
+                      .ingredientListModel
+                      .ingredient1
                       .toString())),
             ],
           ),
