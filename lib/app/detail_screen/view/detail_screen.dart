@@ -93,7 +93,7 @@ class DetailScreen extends StatelessWidget {
                 height: 20,
                 color: kTeal,
               ),
-              IngredientWidgetCard()
+              const IngredientWidgetCard()
             ],
           ),
         ),
